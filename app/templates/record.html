@@ -1,0 +1,247 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div id="homeLink">
+    <a href="{{ url_for('index') }}">Return to search</a>
+</div>
+
+
+<div class="row" >
+    <div class="large-12 columns">
+        <div class="callout panel" id="searchListingPanel">
+
+            <dl class="accordion" data-accordion>
+
+                <dd>
+                    <a href="#propertyPanel">Property</a>
+                    <div id="propertyPanel" class="content active">
+                        <ul class="recordUL">
+                            <li>MLS #: {{listing['mls_num']}} </li>
+                            <li>Price: {{listing['list_price']|format_currency}}</li>
+                            <li>Tax: {{listing['tax_cost']|format_currency}}</li>
+                            <li>Owner Type: {{listing['owner_type']}}</li>
+                            <li>Category: {{listing['property_type']}}</li>
+                            {% if listing['take_posession_time'] %}
+                            <li>Take Posession Time: {{listing['take_posession_time']}}</li>
+                            {% endif %}
+                            {% if listing['remarks'] %}
+                             <li>Comments: {{listing['remarks']}}</li>
+                            {% endif %}
+                            <li>Directions: {{listing['directions']}}</li>
+                        </ul>
+                    </div> 
+                </dd>
+
+                <dd>
+                    <a href="#locationPanel">Location</a>
+                    <div id="locationPanel" class="content">
+                        <ul class="recordUL">
+                            <li><span>Address:  {% if listing['property_address'] %}
+                            {{listing['property_address']}} 
+                            {% endif %}
+                            {% if listing['property_streetname'] %}
+                            {{listing['property_streetname']}} 
+                            {% endif %}
+                            {% if listing['property_streetname_ext'] %}
+                            {{listing['property_streetname_ext']}} 
+                            {% endif %}
+                            </span></li>
+                            {% if listing['property_county'] %}
+                            <li>County/City: {{listing['property_county']}}</li>
+                            {% endif %}
+                            {% if listing['property_zip'] %}
+                            <li>Zip Code: {{listing['property_zip']}}</li>
+                            {% endif %}
+                            <li>Area: {{listing['area']}}</li>
+                            {% if listing['property_zip'] %}
+                            <li>Subdivision: {{listing['subdivision']}} <li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </dd>
+
+                <dd>
+                    <a href="#lotDetailsPanel">Lot Details</a>
+                    <div id="lotDetailsPanel" class="content">
+                        <ul class="recordUL">
+                            {% if listing['sewer_type'] %}
+                              <li>Sewer: {{listing['sewer_type']}} </li>
+                            {% endif %}
+
+                            {% if listing['acres'] %}
+                              <li>Total Acres: {{listing['acres']}} </li>
+                            {% endif %}
+
+                            {% if listing['lot_description'] %}
+                              <li>Description: {{listing['lot_description']}} </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </dd>
+
+                {% if listing['property_type'] != 'Lots/Land' %}
+                <dd>
+                    <a href="#housePanel">House</a>
+                    <div id="housePanel" class="content">
+                        <ul class="recordUL">
+                            {% if listing['year_built'] %}
+                            <li>Year Built: {{listing['year_built']}}</li>
+                            {% endif %}
+
+                            {% if listing['square_footage_finished'] %}
+                            <li>Square Feet: {{listing['square_footage_finished']}}</li>
+                            {% endif %}
+
+                            {% if listing['num_rooms'] %}
+                            <li>Total Rooms: {{listing['num_rooms']}}</li>
+                            {% endif %}
+
+                            {% if listing['num_bedrooms'] %}
+                            <li>Bedrooms: {{listing['num_bedrooms']}}</li>
+                            {% endif %}
+
+                            {% if listing['num_stories'] %}
+                            <li>Stories: {{listing['num_stories']}}</li>
+                            {% endif %}
+
+                            {% if listing['num_full_baths'] %}
+                            <li>Full Baths: {{listing['num_full_baths']}}</li>
+                            {% endif %}
+
+                            {% if listing['num_total_baths'] %}
+                            <li>Total Baths: {{listing['num_total_baths']}}</li>
+                            {% endif %}
+
+                            {% if listing['master_bedroom_level'] %}
+                            <li>Master Bedroom Floor: {{listing['master_bedroom_level']}}</li>
+                            {% endif %}
+
+                            {% if listing['basement'] %}
+                            <li>Basement: {{listing['basement']}}</li>
+                            {% endif %}
+
+                            {% if listing['garage'] %}
+                            <li>Garage: {{listing['garage']}}</li>
+                            {% endif %}
+
+                            {% if listing['num_fireplaces'] %}
+                            <li>Fireplaces: {{listing['num_fireplaces']}}</li>
+                            {% endif %}
+
+                            {% if listing['pool'] %}
+                            <li>Pool: {{listing['pool']}}</li>
+                            {% endif %}
+
+                            {% if listing['construction'] %}
+                            <li>Construction: {{listing['construction']}}</li>
+                            {% endif %}
+
+                            {% if listing['structure_type'] %}
+                            <li>Structure Type: {{listing['structure_type']}}</li>
+                            {% endif %}
+
+                            {% if listing['roof_construction'] %}
+                            <li>Roof Construction: {{listing['roof_construction']}}</li>
+                            {% endif %}
+
+                            {% if listing['handicap_equipped'] %}
+                            <li>Disability Equipped: {{listing['handicap_equipped']}}</li>
+                            {% endif %}
+
+                            {% if listing['parking_type'] %}
+                            <li>Parking Type: {{listing['parking_type']}}</li>
+                            {% endif %}
+
+                            {% if listing['house_style'] %}
+                            <li>Style: {{listing['house_style']}}</li>
+                            {% endif %}
+
+                            {% if listing['appliances'] %}
+                            <li>Appliances: {{listing['appliances']}}</li>
+                            {% endif %}
+
+                            {% if listing['cooling_system_type'] %}
+                            <li>Cooling: {{listing['cooling_system_type']}}</li>
+                            {% endif %}
+
+                            {% if listing['heat_source'] %}
+                            <li>Heating Source: {{listing['heat_source']}}</li>
+                            {% endif %}
+
+                            {% if listing['heating_system_type'] %}
+                            <li>Heating: {{listing['heating_system_type']}}</li>
+                            {% endif %}
+
+                            {% if listing['basement_type'] %}
+                            <li>Basement Type: {{listing['basement_type']}}</li>
+                            {% endif %}
+
+                            {% if listing['amenities'] %}
+                            <li>Amenities: {{listing['amenities']}}</li>
+                            {% endif %}
+
+                            {% if listing['interior_features'] %}
+                            <li>Interior Features: {{listing['interior_features']}}</li>
+                            {% endif %}
+
+                            {% if listing['exterior_features'] %}
+                            <li>Exterior Features: {{listing['exterior_features']}}</li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </dd>
+                {% endif %}
+
+                <dd>
+                    <a href="#schoolPanel">Schools</a>
+                    <div id="schoolPanel" class="content">
+                        <ul class="recordUL">
+                            {% if listing['elementary_school'] %}
+                            <li>Elementary: {{listing['elementary_school']}}</li>
+                            {% endif %}
+
+                            {% if listing['middle_school'] %}
+                            <li>Middle: {{listing['middle_school']}}</li>
+                            {% endif %}
+
+                            {% if listing['high_school'] %}
+                            <li>Highschool: {{listing['high_school']}}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </dd>
+
+                <dd>
+                    <a href="#officePanel">Office</a>
+                    <div id="officePanel" class="content">
+                        <ul class="recordUL">
+                            {% if listing['listing_office_name'] %}
+                            <li>Office Name: {{listing['listing_office_name']}}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+
+
+            <div class="iframe-rwd">
+            <iframe width="500" height="350" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q={%if listing['property_address'] %}{{listing['property_address']}}+{%endif%}{%if listing['property_streetname'] %}{{listing['property_streetname']}}{%endif%}{%if listing['property_streetname_ext'] %}+{{listing['property_streetname_ext']}}+{%endif%}{%if listing['property_county'] %},{{listing['property_county']}}+{%endif%}{%if listing['property_zip'] %}{{listing['property_zip']}}{%endif%}&amp;z=15&amp;iwloc=A&amp;output=embed">Your browser does not support frames</iframe>
+            </div>
+
+            <small>
+            <a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q={%if listing['property_address'] %}{{listing['property_address']}}+{%endif%}{%if listing['property_streetname'] %}{{listing['property_streetname']}}{%endif%}{%if listing['property_streetname_ext'] %}+{{listing['property_streetname_ext']}}+{%endif%}{%if listing['property_county'] %},{{listing['property_county']}}+{%endif%}{%if listing['property_zip'] %}{{listing['property_zip']}}{%endif%}&amp;z=15&amp;iwloc=A" >View Larger Map</a>
+            </small>
+
+        </div>
+    </div>
+</div>
+
+<script type=text/javascript src="{{  url_for('static', filename='js/foundation/foundation.min.js') }}"></script>
+<script>
+    $(document).foundation();
+</script>
+
+
+
+{% endblock %}

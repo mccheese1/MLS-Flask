@@ -1,0 +1,21 @@
+<!-- extend base layout -->
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="large-12 columns">
+      <div class="panel">
+        <footer>
+          <div class="500error">
+            <h1>An unexpected error has occurred</h1>
+			<p>The administrator has been notified. Sorry for the inconvenience!</p>
+			<p><a href="{{url_for('index')}}">Back</a></p>
+          </div>
+        </footer>
+          
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

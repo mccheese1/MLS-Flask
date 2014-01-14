@@ -1,0 +1,263 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<form id="mls_search" action="{{ url_for('listings', page = 1) }}" method="post" >
+  {{form.hidden_tag()}}
+
+
+<div class="row" >
+  <div class="large-12 columns">
+      <div class="panel" id="searchListingPanel">
+      
+        <div class="row" >
+          <div class="large-12 columns">
+            {% if form.errors %}
+                <ul class="errors">
+                    {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                        {% for error in field_errors %}
+                            <li><span style="color: red;">{{ form[field_name].label }} {{ error }}</span></li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+          
+          </div>
+      </div> <!-- end of validation error messages-->
+
+      <div class="row">
+          <div class="medium-6 columns">
+
+          <div class="small-5 columns">
+            {{form.mlsNum.label(class="right inline")}}
+          </div>
+
+          <div class="small-7 columns">
+            {{form.mlsNum(maxlength="8")}}
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row" >
+        <div class="large-12 columns">
+
+          {{form.propertyType.label}}  {{form.propertyType}}
+
+        </div>
+      </div><!--category row end-->
+
+    <div class="row" >
+      <div class="large-12 columns">
+       
+        <div class="large-4 small-8 medium-4 columns">
+            {{form.areaSelect(size=12)}}
+        </div>
+        <div class="large-4 small-4 columns left">
+            {{form.areaSelect.label}}
+            <span class="emphasis">(Select mutiple areas:<br />Windows: Ctrl + select<br />Mac: Cmd + select)</span> 
+          </div>
+
+        </div>
+      </div><!--area row end-->
+      <br><br>
+      <div class="row">
+
+        <div class="medium-6 columns">
+          <div class="small-3 columns">
+            {{form.minPrice.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.minPrice(maxlength="15")}}
+          </div>
+        </div>
+       
+        
+        <div class="medium-6 columns">
+          <div class="small-3 columns">
+            {{form.maxPrice.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.maxPrice(maxlength="15")}}
+          </div>
+        </div>
+
+      </div><!--price row end--> 
+
+      <br>
+      <div class="row">
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.minSqFeetSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.minSqFeetSelect}}
+          </div>
+
+        </div>
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.maxSqFeetSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+           {{form.maxSqFeetSelect}}
+          </div>
+
+        </div>
+
+      </div><!--square feet row end--> 
+
+      <br>
+      <div class="row">
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.minAcresSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.minAcresSelect}}
+          </div>
+
+        </div>
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.maxAcresSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.maxAcresSelect}}
+          </div>
+
+        </div>
+
+      </div><!--acre row end--> 
+
+      <br>
+      <div class="row">
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.bedroomSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.bedroomSelect}}
+          </div>
+
+        </div>
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.bathSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.bathSelect}}
+          </div>
+
+        </div>
+
+      </div><!--Bedrooms/Baths row end--> 
+
+      <br>
+      <div class="row">
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.basementSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.basementSelect}}
+          </div>
+
+        </div>
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.garageSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.garageSelect}}
+          </div>
+
+        </div>
+
+      </div><!--basement/garage row end--> 
+
+      <br>
+      <div class="row">
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.masterFloorSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.masterFloorSelect}}
+          </div>
+
+        </div>
+
+        <div class="medium-6 columns">
+
+          <div class="small-3 columns">
+            {{form.displayGroupSelect.label(class="right inline")}}
+          </div>
+
+          <div class="small-9 columns">
+            {{form.displayGroupSelect}}
+          </div>
+
+        </div>
+
+      </div><!--master bed floor/display groups row end--> 
+
+      
+
+      <div class="row">
+
+        <div class="small-6 columns center">
+          <div class="small-6 small-centered columns">
+            <input name="reset" type="reset" value="Clear Form" />
+          </div>
+        </div>
+
+        <div class="small-6 columns center">
+          <div class="small-6 small-centered columns">
+            <input type="submit" value="Search" />
+          </div>
+        </div>
+
+    </div> <!--end of main search listing panel-->
+
+
+    </div> <!--end of main search listing panel-->
+  </div>
+</div> <!--end of main search row-->
+
+
+
+</form>
+
+
+
+{% endblock %}

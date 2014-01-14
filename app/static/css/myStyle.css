@@ -1,0 +1,111 @@
+body ul
+{
+    list-style-type: none;
+}
+#propertyType li
+{
+	display: inline-block;	
+}
+
+.singleResult:hover{
+	color:black;
+}
+.errors label{
+	display:inline;
+}
+header{
+	text-align:center;
+}
+footer p{
+	margin-bottom: 0;
+	font-size: .7em;
+}
+
+#homeLink{
+	text-align:center;
+	margin-bottom: 1em;
+}
+.pageLinks{
+	text-align:center;
+	display: inline-block;
+	background-color: ;
+	padding: 3px;
+	margin-bottom: .5em;
+
+}
+.pageLinks a:hover{
+	color:black;
+}
+#searchOutput{
+	margin-bottom: 2em;
+	margin-top: 1em;
+}
+header .panel{
+	height: 5em;
+}
+#sortBy{
+	margin-bottom: 1em;
+	text-align:center;
+
+}
+.iframe-rwd  {
+position: relative;
+padding-bottom: 65.25%;
+padding-top: 30px;
+height: 0;
+overflow: hidden;
+margin-bottom: 1em;
+}
+.iframe-rwd iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.resultAddress{
+
+}
+.priceLabel{
+	font-size: 2em;
+}
+.floatRight{
+	
+}
+.listingImage{
+	margin-bottom: 2em;
+	float: right;
+}
+.mlsImg{
+	float: right;
+	
+}
+dd a{
+	
+	border-bottom: solid 1px black;
+}
+.resultInfo{
+	float: left;
+}
+.clear{
+	clear: both;
+}
+.recordUL{
+	margin-left: 0;
+	margin-bottom: 0;
+}
+@media only screen and (max-width: 767px) { 
+	#propertyType li{
+		display: block;	
+	}
+	
+}
+
+@media only screen and (max-width: 640px) { 
+.mlsImg{
+	float: none;
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+	}
+}

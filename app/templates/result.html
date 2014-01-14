@@ -1,0 +1,206 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<div id="homeLink">
+    <a href="{{ url_for('index') }}">Return to search</a>
+    <br>
+   
+    <span>Search Results - {{resultCount}} record{% if resultCount != 1 %}s{% endif %} 
+    found matching the criteria.<span>
+</div>
+
+
+<div class="row">
+    <div class="large-12 columns">
+    
+    <div id="searchOutput">
+
+        {% if session['numPages'] != 0 %}
+        <div class="row" id= 'sortingOptions'>
+
+            <form id="listSort" action="{{ url_for('listings', page = 1) }}" method="post">
+                {{form.hidden_tag()}}
+
+                <div class="medium-6 columns">
+
+                    <div class="small-6 columns">
+                        {{form.sortOrderSelect.label(class="right inline")}} 
+                    </div>
+
+                    <div class="small-6 columns">
+                        {{form.sortOrderSelect(onchange="this.form.submit()")}}
+                    </div>
+  
+                </div>
+
+
+            </form>
+
+        </div> <!--end of sort order row-->
+
+     
+
+        <div class="row">
+            <div class="small-4 small-centered columns">
+                <div class="pageLinks">
+                    {% if session['currentResultPage'] != 1 %}
+                    <a href="{{ url_for('listings', page = 1) }}">First</a>
+                    {% endif %}
+                    {% if session['currentResultPage'] != 1 %}
+                    <a href="{{ url_for( 'listings', page = (session['currentResultPage']-1) ) }}">Previous</a> 
+                    {% endif %}
+                    <span id = "currentPageNum">Page {{session['currentResultPage']}} of {{session['numPages']}}</span>
+                    {% if session['currentResultPage'] != session['numPages'] %}
+                    <a href="{{ url_for( 'listings', page = (session['currentResultPage']+1) ) }}">Next</a>
+                    {% endif %}
+                    {% if session['currentResultPage'] != session['numPages'] %}
+                    <a href="{{ url_for('listings', page = session['numPages']) }}">Last</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {%endif%} {# end of session['numPages'] != 0 if statement#}
+
+        
+        {% for listing in results %}
+            <div class="large-12 columns">
+            <a href="{{ url_for('record', mlsNum = listing['mls_num']|int ) }}" class="singleResult">
+                <div class="callout panel">
+                {% if listing['property_type'] == "Lots/Land" %}
+                    <div class="medium-6 columns listingImage">
+                    <img class="mlsImg" src={{  url_for('static', filename='img/no_image.jpg') }} alt="Listing Image" >
+                    </div>
+
+                    <ul>
+                        <li><span class='priceLabel'>{{listing['list_price']|format_currency}}</span></li>
+                        
+
+                        <li class = 'resultAddress'>
+                            <span>{% if listing['property_address'] %}
+                            {{listing['property_address']}} 
+                            {% endif %}
+                            {% if listing['property_streetname'] %}
+                            {{listing['property_streetname']}} 
+                            {% endif %}
+                            {% if listing['property_streetname_ext'] %}
+                            {{listing['property_streetname_ext']}}
+                            {% endif %}
+                            ,
+                            {% if listing['property_county'] %}
+                            {{listing['property_county']}},
+                            {% endif %}
+                            {% if listing['property_zip'] %}
+                            {{listing['property_zip']}} 
+                            {% endif %}</span>
+                        </li>
+                        <li>MLS #: {{listing['mls_num']}}</li>
+                        <br>
+                        <div class="clear"></div>
+                        {% if listing['remarks'] %}
+                        <li>{{listing['remarks']}}</li>
+                        {% endif %}
+                    </ul>
+                {# end of single lots/land prop types #}
+
+                {% elif listing['property_type'] == "Multi-Family" %}
+                    <div class="medium-6 columns listingImage">
+                    <img class="mlsImg" src={{  url_for('static', filename='img/no_image.jpg') }} alt="Listing Image" >
+                    </div>
+                    <ul>
+                        <li><span class='priceLabel'>{{listing['list_price']|format_currency}}</span></li>
+                        <li>{{listing['square_footage_finished']}} Sq Ft</li>
+                       
+
+
+                        <li class = 'resultAddress'>
+                           <span>{% if listing['property_address'] %}
+                            {{listing['property_address']}} 
+                            {% endif %}
+                            {% if listing['property_streetname'] %}
+                            {{listing['property_streetname']}} 
+                            {% endif %}
+                            {% if listing['property_streetname_ext'] %}
+                            {{listing['property_streetname_ext']}}
+                            {% endif %}
+                            ,
+                            {% if listing['property_county'] %}
+                            {{listing['property_county']}},
+                            {% endif %}
+                            {% if listing['property_zip'] %}
+                            {{listing['property_zip']}} 
+                            {% endif %}</span>
+                        </li>
+                        <li>MLS #: {{listing['mls_num']}}</li>
+                        <br>
+                        <div class="clear"></div>
+                        {% if listing['remarks']%}
+                        <li>{{listing['remarks']}}</li>
+                        {% endif %}
+                    </ul>
+                {# end of multi family prop types #}
+
+                {% else %}
+                    <div class="medium-6 columns listingImage">
+                    <img class="mlsImg" src={{  url_for('static', filename='img/no_image.jpg') }} alt="Listing Image" >
+                    </div>
+                    <ul>
+                        <li><span class='priceLabel'>{{listing['list_price']|format_currency}}</span></li>
+
+                        <li><span>{% if listing['num_bedrooms'] %}
+                        {{listing['num_bedrooms']}} beds, 
+                        {% endif %}
+                        {% if listing['num_total_baths'] %}
+                        {{listing['num_total_baths']}} baths, 
+                        {% endif %}
+                        {{listing['square_footage_finished']}} Sq Ft</span></li>
+                        
+
+                        <li class = 'resultAddress'>
+                            <span>{% if listing['property_address'] %}
+                            {{listing['property_address']}} 
+                            {% endif %}
+
+                            {% if listing['property_streetname'] %}
+                            {{listing['property_streetname']}} 
+                            {% endif %}
+
+                            {% if listing['property_streetname_ext'] %}
+                            {{listing['property_streetname_ext']}}
+                            {% endif %}
+                            ,
+                            {% if listing['property_county'] %}
+                            {{listing['property_county']}},
+                            {% endif %}
+
+                            {% if listing['property_zip'] %}
+                            {{listing['property_zip']}} 
+                            {% endif %}</span>
+                        </li>
+                        <li>MLS #: {{listing['mls_num']}}</li>
+                        <br>
+                        <div class="clear"></div>
+                        {% if listing['remarks']%}
+                            <li>{{listing['remarks']}}</li>
+                        {% endif %}
+                    </ul>
+                {# end of single fam/condo prop types #}
+                {% endif %}
+
+                </div></a>
+            </div>
+        {% endfor %}
+   
+      </div><!--end of search output-->
+    
+  </div>
+</div>
+
+<script type="text/javascript">
+window.onload=function(){document.getElementById('sortOrderSelect').value='{{session['sortOrder']}}';}
+
+
+</script>
+
+{% endblock %}

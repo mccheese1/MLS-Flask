@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/myStyle.css') }}">
+
+    <script type=text/javascript src="{{  url_for('static', filename='js/foundation/modernizr.js') }}"></script>
+    <script type=text/javascript src="{{  url_for('static', filename='js/vendor/jquery.js') }}"></script>
+
+    <script type=text/javascript>
+      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+    <title>MLS Rental Search</title>
+
+</head>
+  
+
+<body>
+
+    <header> <!-- header -->
+        <div class="row">
+
+            <div class="small-12-centered columns">
+                <h3>MLS Listing Search</h3>
+            </div>
+         
+        </div>
+    </header>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div id="flashMessages">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="panel">
+                    <ul>
+                    {% for message in messages %}
+                        <li>{{ message }} </li>
+                    {% endfor %}
+                    </ul>
+                 </div>
+            </div>
+        </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+    <div class="container"> <!--Main body-->
+      {% block body %}
+      {% endblock %}
+    </div>
+
+ 
+  
+    <div class="row"> <!-- footer -->
+        <div class="large-12 columns">
+            <footer>
+                <p><img src="{{  url_for('static', filename='img/icons/equal-opportunity.gif') }}" alt="Equal Housing Opportunity" width="20" height="21" />Equal Housing OpportunityEqual Housing Opportunity  <img src="{{  url_for('static', filename='img/icons/realtor-logo.gif') }}" alt="Realtor Logo" width="20" height="21" />Realtor®  MLS Multiple Listing Services</p>
+                <p>All or a portion of the multiple Listing information is provided by the Central Virginia Regional Multiple Listing Service, LLC, from a copyrighted compilation of Listings. All CVR MLS information provided is deemed reliable but is not guaranteed accurate. The compilation of Listings and each individual Listing are © 2014 Central Virginia Regional Multiple Listing Service, LLC. All rights reserved.
+                Listings marked with the CVRMLS logo are provided courtesy of the CVRMLS IDX database. <img src="{{  url_for('static', filename='img/icons/cvmls_mini_logo.gif') }}" alt="CVMLS" width="54" height="22" />
+                </p>
+                <p>Disclaimer: Neither the listing agent(s), broker(s), or publisher(s) are repsonsible for typographical errors, misinformation, misprints, or other data collectively compiled here. Use of this site and/or information in no way implies any liability. All agent(s), broker(s), and publisher(s) shall be held harmless.</p>
+
+
+                {% if session['date'] %}
+                    <p>Database last updated on {{session['date']}}</p>
+                {% endif %}
+            </footer>  
+        </div>
+    </div>
+  
+  
+     
+</body>
+
+</html>
